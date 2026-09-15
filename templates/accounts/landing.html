@@ -1,0 +1,549 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>InternMate | Intern Enablement Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'app.css' %}" />
+    <style>
+      .dwf2-wrap {
+        --ink: #0b1744;
+        --muted: #5f6f9f;
+        --line: #dfe5f7;
+        --violet: #6d35ff;
+        --blue: #1763ff;
+        --green: #23b66b;
+        --orange: #ff7a1a;
+        --soft-violet: #f4efff;
+        --soft-blue: #edf5ff;
+        --soft-green: #eefbf5;
+        --soft-orange: #fff4ea;
+        --shadow: 0 18px 40px rgba(20, 35, 90, 0.08);
+        --radius: 20px;
+        color: var(--ink);
+      }
+
+      .dwf2-hero {
+        text-align: center;
+        margin-bottom: 18px;
+      }
+
+      .dwf2-hero h2 {
+        margin: 0;
+        font-size: clamp(1.45rem, 3.5vw, 2.35rem);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        font-weight: 900;
+      }
+
+      .dwf2-hero h2 span { color: var(--violet); }
+
+      .dwf2-hero p {
+        margin: 10px auto 0;
+        max-width: 820px;
+        color: #445485;
+        font-size: 0.96rem;
+      }
+
+      .dwf2-layout {
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr) 250px;
+        gap: 14px 18px;
+        align-items: stretch;
+      }
+
+      .dwf2-col {
+        display: grid;
+        gap: 14px;
+      }
+
+      .dwf2-role,
+      .dwf2-row,
+      .dwf2-ai,
+      .dwf2-outcomes,
+      .dwf2-codex {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: var(--shadow);
+      }
+
+      .dwf2-role {
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        gap: 12px;
+        align-items: center;
+        padding: 14px;
+        transition: transform 220ms ease, box-shadow 220ms ease, border-color 180ms ease, background-color 180ms ease;
+        will-change: transform;
+      }
+
+      .dwf2-avatar {
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 34px;
+        transition: transform 220ms ease, box-shadow 220ms ease, background-color 180ms ease;
+      }
+
+      .dwf2-role h3 {
+        margin: 0 0 4px;
+        font-size: 0.95rem;
+        line-height: 1.2;
+      }
+
+      .dwf2-role p {
+        margin: 0;
+        color: #3c4a75;
+        font-size: 0.78rem;
+      }
+
+      .dwf2-role:hover,
+      .dwf2-role:focus-visible {
+        transform: translateY(-4px) scale(1.01);
+        outline: none;
+      }
+
+      .dwf2-role:hover .dwf2-avatar,
+      .dwf2-role:focus-visible .dwf2-avatar {
+        transform: scale(1.06);
+      }
+
+      .dwf2-row {
+        padding: 14px 12px;
+        background: linear-gradient(180deg, #ffffff, #f8fbff);
+      }
+
+      .dwf2-steps {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(90px, 1fr));
+        gap: 10px;
+      }
+
+      .dwf2-step {
+        text-align: center;
+        border: 1px solid transparent;
+        border-radius: 14px;
+        padding: 6px;
+        transition: transform 220ms ease, box-shadow 220ms ease, border-color 180ms ease, background-color 180ms ease;
+        will-change: transform;
+      }
+
+      .dwf2-icon {
+        width: 58px;
+        height: 58px;
+        margin: 0 auto 8px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        font-size: 28px;
+        color: inherit;
+        border: 1px solid #d6ddf7;
+        background: rgba(255, 255, 255, 0.85);
+      }
+
+      .dwf2-step:hover,
+      .dwf2-step:focus-visible {
+        transform: translateY(-3px);
+        border-color: #cdd7f6;
+        background: linear-gradient(180deg, #ffffff, #f5f8ff);
+        box-shadow: 0 10px 22px rgba(23, 99, 255, 0.12);
+        outline: none;
+      }
+
+      .dwf2-step h4 {
+        margin: 0 0 4px;
+        font-size: 0.78rem;
+      }
+
+      .dwf2-step p {
+        margin: 0;
+        font-size: 0.7rem;
+        color: #4f5b86;
+      }
+
+      .dwf2-ai {
+        padding: 14px 16px;
+        border-color: #b8d8ff;
+        background: linear-gradient(135deg, #f7fbff, #eef6ff);
+        transition: transform 220ms ease, box-shadow 220ms ease, border-color 180ms ease, background-color 180ms ease;
+      }
+
+      .dwf2-ai:hover,
+      .dwf2-ai:focus-visible {
+        transform: translateY(-4px);
+        border-color: #8ec0ff;
+        background: linear-gradient(135deg, #f3f9ff, #e9f3ff);
+        box-shadow: 0 16px 30px rgba(23, 99, 255, 0.14);
+        outline: none;
+      }
+
+      .dwf2-ai-grid {
+        display: grid;
+        grid-template-columns: 88px minmax(0, 1fr) minmax(0, 1fr);
+        gap: 12px;
+        align-items: start;
+      }
+
+      .dwf2-robot {
+        width: 76px;
+        height: 76px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 40px;
+        background: #e6f2ff;
+        border: 2px solid #bcdcff;
+      }
+
+      .dwf2-ai h3 {
+        margin: 0 0 6px;
+        color: var(--blue);
+        font-size: 0.95rem;
+      }
+
+      .dwf2-ai p,
+      .dwf2-ai li {
+        margin: 0;
+        color: #39446f;
+        font-size: 0.76rem;
+      }
+
+      .dwf2-ai ul {
+        margin: 6px 0 0;
+        padding-left: 16px;
+      }
+
+      .dwf2-outcomes {
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        height: 100%;
+      }
+
+      .dwf2-outcomes h3 {
+        margin: 0;
+        font-size: 0.92rem;
+        color: var(--violet);
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+
+      .dwf2-outcome {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        gap: 10px;
+        align-items: center;
+        border: 1px solid #e2e8f4;
+        border-radius: 12px;
+        background: #fff;
+        padding: 10px;
+        flex: 1;
+      }
+
+      .dwf2-outcome .dwf2-icon {
+        width: 40px;
+        height: 40px;
+        margin: 0;
+        font-size: 20px;
+        color: var(--violet);
+        background: var(--soft-violet);
+      }
+
+      .dwf2-outcome h4 {
+        margin: 0 0 2px;
+        font-size: 0.8rem;
+      }
+
+      .dwf2-outcome p {
+        margin: 0;
+        font-size: 0.74rem;
+        line-height: 1.35;
+        color: #4d5b86;
+      }
+
+      .dwf2-codex {
+        margin-top: 14px;
+        padding: 12px 14px;
+        display: grid;
+        grid-template-columns: 54px 1.2fr repeat(4, 1fr);
+        gap: 10px;
+        align-items: center;
+        border-color: #bdd4ff;
+        background: linear-gradient(90deg, #f8fbff, #edf5ff);
+      }
+
+      .dwf2-terminal {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        background: #062b76;
+        color: #fff;
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      .dwf2-mini {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: #4b5b8a;
+        border: 1px solid #d7e3ff;
+        border-radius: 12px;
+        background: #f9fbff;
+        padding: 9px 10px;
+        transition: transform 220ms ease, box-shadow 220ms ease, border-color 180ms ease, background-color 180ms ease;
+      }
+
+      .dwf2-mini:hover,
+      .dwf2-mini:focus-visible {
+        transform: translateY(-3px);
+        border-color: #acc8ff;
+        background: #f1f6ff;
+        box-shadow: 0 12px 22px rgba(23, 99, 255, 0.14);
+        outline: none;
+      }
+
+      .dwf2-vio { color: var(--violet); }
+      .dwf2-vio .dwf2-avatar { background: var(--soft-violet); border: 2px solid #d8c9ff; }
+      .dwf2-vio:hover,
+      .dwf2-vio:focus-visible {
+        border-color: #bda1ff;
+        background: linear-gradient(180deg, #ffffff, #f6f1ff);
+        box-shadow: 0 16px 30px rgba(109, 53, 255, 0.18);
+      }
+      .dwf2-blue { color: var(--blue); }
+      .dwf2-blue .dwf2-avatar { background: var(--soft-blue); border: 2px solid #c8ddff; }
+      .dwf2-blue:hover,
+      .dwf2-blue:focus-visible {
+        border-color: #98beff;
+        background: linear-gradient(180deg, #ffffff, #eff5ff);
+        box-shadow: 0 16px 30px rgba(23, 99, 255, 0.16);
+      }
+      .dwf2-green { color: var(--green); }
+      .dwf2-green .dwf2-avatar { background: var(--soft-green); border: 2px solid #c8efe0; }
+      .dwf2-green:hover,
+      .dwf2-green:focus-visible {
+        border-color: #9cdfc2;
+        background: linear-gradient(180deg, #ffffff, #f0fbf5);
+        box-shadow: 0 16px 30px rgba(35, 182, 107, 0.16);
+      }
+      .dwf2-orange { color: var(--orange); }
+      .dwf2-orange .dwf2-avatar { background: var(--soft-orange); border: 2px solid #ffd9be; }
+      .dwf2-orange:hover,
+      .dwf2-orange:focus-visible {
+        border-color: #ffc89d;
+        background: linear-gradient(180deg, #ffffff, #fff6ee);
+        box-shadow: 0 16px 30px rgba(255, 122, 26, 0.16);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .dwf2-role,
+        .dwf2-avatar,
+        .dwf2-step,
+        .dwf2-ai,
+        .dwf2-mini,
+        .landing-spot {
+          transition: none !important;
+        }
+
+        .dwf2-role:hover,
+        .dwf2-role:focus-visible {
+          transform: none;
+        }
+
+        .dwf2-step:hover,
+        .dwf2-step:focus-visible,
+        .dwf2-ai:hover,
+        .dwf2-ai:focus-visible,
+        .dwf2-mini:hover,
+        .dwf2-mini:focus-visible,
+        .landing-spot:hover,
+        .landing-spot:focus-visible {
+          transform: none;
+        }
+      }
+
+      .landing-spot {
+        transition: transform 220ms ease, box-shadow 220ms ease, border-color 180ms ease, background-color 180ms ease;
+        will-change: transform;
+      }
+
+      .landing-spot:hover,
+      .landing-spot:focus-visible {
+        transform: translateY(-4px);
+        border-color: #b5d4de;
+        background: linear-gradient(180deg, #ffffff, #f3fbfa);
+        box-shadow: 0 16px 30px rgba(15, 118, 110, 0.14);
+        outline: none;
+      }
+
+      @media (max-width: 1180px) {
+        .dwf2-layout { grid-template-columns: 1fr; }
+        .dwf2-col.roles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .dwf2-codex { grid-template-columns: 54px 1fr; }
+      }
+
+      @media (max-width: 820px) {
+        .dwf2-col.roles,
+        .dwf2-steps,
+        .dwf2-ai-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body class="app-body">
+    <div class="container py-4 py-md-5">
+      <div class="hero hero-brand p-4 p-md-5 mb-4">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-8">
+            <p class="text-uppercase text-muted small mb-2">Intern Support + Operational Visibility</p>
+            <h1 class="display-5 fw-bold mb-2">Digital Worker - InternMate</h1>
+            <p class="lead mb-3">InternMate is a role-aware digital worker platform where interns, mentors, managers, and leadership collaborate through structured execution, guided reviews, and responsible AI capture.</p>
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn btn-success" href="{% url 'login' %}">Login</a>
+              <a class="btn btn-outline-secondary" href="/admin/">Admin Login</a>
+              <a class="btn btn-outline-primary" href="{% url 'codex-cli-guide' %}">How to Guide for CODEX CLI Setup</a>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="soft-card p-3">
+              <h6 class="mb-2">Platform Highlights</h6>
+              <ul class="small mb-0">
+                <li>Digital-worker assisted task lifecycle for all internship roles</li>
+                <li>Structured daily logs with workflow, blockers, and dependencies</li>
+                <li>Mentor review loop, manager oversight, and leadership summaries</li>
+                <li>KPI dashboards, trends, and export-ready reporting</li>
+                <li>Responsible AI usage tracking with human review accountability</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6 col-lg-3">
+          <div class="soft-card p-3 h-100 landing-spot" tabindex="0">
+            <h6>For Interns</h6>
+            <p class="small text-muted mb-0">Simple daily capture for planned work, actual output, dependencies, and support needed.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="soft-card p-3 h-100 landing-spot" tabindex="0">
+            <h6>For Mentors</h6>
+            <p class="small text-muted mb-0">Review queues, comments, and reopen actions for guided progress.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="soft-card p-3 h-100 landing-spot" tabindex="0">
+            <h6>For Managers</h6>
+            <p class="small text-muted mb-0">Global intern visibility across projects with trend and KPI insights.</p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="soft-card p-3 h-100 landing-spot" tabindex="0">
+            <h6>For Leadership</h6>
+            <p class="small text-muted mb-0">Summary-only views for internship health and outcome reporting.</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="dwf2-wrap mt-4 mt-md-5" aria-label="Digital Worker workflow">
+        <div class="soft-card p-3 p-md-4">
+          <div class="dwf2-hero">
+            <h2>Digital Worker Flow - <span>InternMate</span></h2>
+            <p>Role-aware workflow for task execution, review, and leadership visibility with AI-powered assistance and human validation.</p>
+          </div>
+
+          <div class="dwf2-layout">
+            <aside class="dwf2-col roles">
+              <article class="dwf2-role dwf2-vio" tabindex="0"><div class="dwf2-avatar">👨‍💻</div><div><h3>1. Intern</h3><p>Owns daily task execution and progress tracking.</p></div></article>
+              <article class="dwf2-role dwf2-blue" tabindex="0"><div class="dwf2-avatar">🤖</div><div><h3>2. Digital Worker</h3><p>Guides and augments work while keeping humans in loop.</p></div></article>
+              <article class="dwf2-role dwf2-green" tabindex="0"><div class="dwf2-avatar">👩‍🏫</div><div><h3>3. Mentor</h3><p>Reviews tasks, provides feedback, and ensures quality.</p></div></article>
+              <article class="dwf2-role dwf2-orange" tabindex="0"><div class="dwf2-avatar">👨‍💼</div><div><h3>4. Manager</h3><p>Monitors, assigns, and intervenes to ensure delivery.</p></div></article>
+              <article class="dwf2-role dwf2-vio" tabindex="0"><div class="dwf2-avatar">🏛️</div><div><h3>5. Leadership</h3><p>Drives data-informed decisions and program health.</p></div></article>
+            </aside>
+
+            <section class="dwf2-col">
+              <article class="dwf2-row dwf2-vio">
+                <div class="dwf2-steps">
+                  <div class="dwf2-step"><div class="dwf2-icon">📋</div><h4>Create / Update Task</h4><p>Add task details, type, priority, and project.</p></div>
+                  <div class="dwf2-step"><div class="dwf2-icon">75%</div><h4>Update Progress</h4><p>Update completion and work done.</p></div>
+                  <div class="dwf2-step"><div class="dwf2-icon">⚠️</div><h4>Capture Blockers</h4><p>Track blockers and dependencies.</p></div>
+                  <div class="dwf2-step"><div class="dwf2-icon">AI</div><h4>Log AI Usage</h4><p>Track tool, contribution, and review.</p></div>
+                  <div class="dwf2-step"><div class="dwf2-icon">✈️</div><h4>Submit for Review</h4><p>Submit for mentor review and approval.</p></div>
+                </div>
+              </article>
+
+              <article class="dwf2-ai" tabindex="0">
+                <div class="dwf2-ai-grid">
+                  <div class="dwf2-robot">🤖</div>
+                  <div>
+                    <h3>AI-Powered Digital Worker (Codex + MCP)</h3>
+                    <p>Provides intelligent assistance through prompts, suggestions, best practices, and debugging help. Human validation remains mandatory.</p>
+                  </div>
+                  <div>
+                    <h3>Guardrails</h3>
+                    <ul>
+                      <li>Smart Suggestions</li>
+                      <li>Best Practices</li>
+                      <li>Error Detection</li>
+                      <li>No Auto Decisions</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+
+              <article class="dwf2-row dwf2-green">
+                <div class="dwf2-steps">
+                  <div class="dwf2-step"><div class="dwf2-icon">📄</div><h4>Review Task</h4><p>Validate details and AI usage.</p></div>
+                  <div class="dwf2-step"><div class="dwf2-icon">💬</div><h4>Add Comments</h4><p>Provide feedback and guidance.</p></div>
+                  <div class="dwf2-step"><div class="dwf2-icon">🔄</div><h4>Reopen If Needed</h4><p>Request corrections.</p></div>
+                  <div class="dwf2-step"><div class="dwf2-icon">✅</div><h4>Approve Task</h4><p>Mark task reviewed and approved.</p></div>
+                  <div class="dwf2-step"><div class="dwf2-icon">🛟</div><h4>Unblock Support</h4><p>Resolve or escalate blockers.</p></div>
+                </div>
+              </article>
+
+              <article class="dwf2-row dwf2-orange">
+                <div class="dwf2-steps">
+                  <div class="dwf2-step"><div class="dwf2-icon">👤</div><h4>Assign Tasks</h4><p>Create and assign tasks.</p></div>
+                  <div class="dwf2-step"><div class="dwf2-icon">📊</div><h4>Monitor Progress</h4><p>Track team and project status.</p></div>
+                  <div class="dwf2-step"><div class="dwf2-icon">⚠️</div><h4>Intervene</h4><p>Address blockers early.</p></div>
+                  <div class="dwf2-step"><div class="dwf2-icon">👥</div><h4>Cross-team Visibility</h4><p>View KPI and workload signals.</p></div>
+                  <div class="dwf2-step"><div class="dwf2-icon">🎯</div><h4>Ensure Alignment</h4><p>Keep goals and deadlines aligned.</p></div>
+                </div>
+              </article>
+            </section>
+
+            <aside class="dwf2-outcomes">
+              <h3>Outcomes & Visibility</h3>
+              <article class="dwf2-outcome"><div class="dwf2-icon">👁️</div><div><h4>Real-time Visibility</h4><p>Tasks, progress, and blockers in one view.</p></div></article>
+              <article class="dwf2-outcome"><div class="dwf2-icon">👥</div><div><h4>Better Collaboration</h4><p>Clear communication across roles.</p></div></article>
+              <article class="dwf2-outcome"><div class="dwf2-icon">🛡️</div><div><h4>Accountability</h4><p>Human review and audit ownership.</p></div></article>
+              <article class="dwf2-outcome"><div class="dwf2-icon">AI</div><div><h4>AI Accountability</h4><p>Track AI usage with validation.</p></div></article>
+              <article class="dwf2-outcome"><div class="dwf2-icon">↗</div><div><h4>Actionable Insights</h4><p>KPIs drive better decisions.</p></div></article>
+            </aside>
+          </div>
+
+          <section class="dwf2-codex" aria-label="Direct access through Codex CLI">
+            <div class="dwf2-terminal">›_</div>
+            <div>
+              <h3 class="mb-1" style="color:#164bff;font-size:0.9rem;">DIRECT ACCESS TO ALL ROLES VIA CODEX CLI</h3>
+              <p class="mb-0" style="font-size:0.74rem;color:#4b5b8a;">All roles can interact with InternMate using Codex CLI for fast and guided actions.</p>
+            </div>
+            <div class="dwf2-mini" tabindex="0">💬 Run Codex CLI</div>
+            <div class="dwf2-mini" tabindex="0">⌨️ Use Guided Prompts</div>
+            <div class="dwf2-mini" tabindex="0">👤 Human Validation</div>
+            <div class="dwf2-mini" tabindex="0">📜 Traceable & Governed</div>
+          </section>
+        </div>
+      </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

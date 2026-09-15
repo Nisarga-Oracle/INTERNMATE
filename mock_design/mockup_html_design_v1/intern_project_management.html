@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interns & Projects - InternMate Mockup V1</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo"></div> InternMate</div>
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="daily_logs.html">Daily Logs</a>
+        <a href="daily_log_form.html">Log Entry Form</a>
+        <a class="active" href="intern_project_management.html">Interns & Projects</a>
+        <a href="review_queue.html">Mentor Review Queue</a>
+        <a href="reports_exports.html">Reports & Exports</a>
+        <a href="master_data_admin.html">Master Data Admin</a>
+        <a href="hr_summary_view.html">HR Summary View</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <section class="topbar">
+        <div>
+          <h1>Intern & Project Management</h1>
+          <div class="small">Admin setup with multi-project assignment in Phase 1.</div>
+        </div>
+        <div>
+          <button class="btn ghost">+ Add Project</button>
+          <button class="btn primary">+ Add Intern</button>
+        </div>
+      </section>
+
+      <section class="layout-2">
+        <div class="card">
+          <h3>Intern Profiles</h3>
+          <table class="table">
+            <thead><tr><th>Intern ID</th><th>Name</th><th>Department</th><th>Mentor</th><th>Manager</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>INT-021</td><td>Riya Sharma</td><td>Engineering</td><td>A. Rao</td><td>P. Nair</td><td><span class="status closed">Active</span></td></tr>
+              <tr><td>INT-022</td><td>Karan Patel</td><td>Engineering</td><td>A. Rao</td><td>P. Nair</td><td><span class="status review">On Hold</span></td></tr>
+              <tr><td>INT-023</td><td>Neha Gupta</td><td>Data</td><td>S. Kapoor</td><td>R. Shah</td><td><span class="status draft">Active</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Project Catalog</h3>
+          <table class="table">
+            <thead><tr><th>Project</th><th>Dept</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>InternMate</td><td>Engineering</td><td>Active</td></tr>
+              <tr><td>AI Insights</td><td>Data</td><td>Active</td></tr>
+              <tr><td>Ops Metrics</td><td>Operations</td><td>Planned</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:14px;">
+        <h3>Intern to Project Assignment</h3>
+        <table class="table">
+          <thead><tr><th>Intern</th><th>Primary Project</th><th>Secondary Project</th><th>From</th><th>To</th></tr></thead>
+          <tbody>
+            <tr><td>Riya Sharma</td><td>InternMate</td><td>AI Insights</td><td>Apr 01</td><td>May 30</td></tr>
+            <tr><td>Karan Patel</td><td>InternMate</td><td>-</td><td>Apr 10</td><td>Jun 30</td></tr>
+            <tr><td>Neha Gupta</td><td>AI Insights</td><td>Ops Metrics</td><td>Apr 05</td><td>Jun 15</td></tr>
+          </tbody>
+        </table>
+      </section>
+      <div class="footer">Intern & Project Management Mockup</div>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Review Queue - InternMate Mockup V1</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo"></div> InternMate</div>
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="daily_logs.html">Daily Logs</a>
+        <a href="daily_log_form.html">Log Entry Form</a>
+        <a href="intern_project_management.html">Interns & Projects</a>
+        <a class="active" href="review_queue.html">Mentor Review Queue</a>
+        <a href="reports_exports.html">Reports & Exports</a>
+        <a href="master_data_admin.html">Master Data Admin</a>
+        <a href="hr_summary_view.html">HR Summary View</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <section class="topbar">
+        <div>
+          <h1>Mentor / Manager Review Queue</h1>
+          <div class="small">Mentor and manager can always reopen entries.</div>
+        </div>
+        <div>
+          <button class="btn ghost">Bulk Comment</button>
+          <button class="btn primary">Refresh Queue</button>
+        </div>
+      </section>
+
+      <section class="layout-2">
+        <div class="card">
+          <h3>Pending Reviews</h3>
+          <table class="table">
+            <thead><tr><th>Intern</th><th>Task</th><th>Workflow</th><th>Risk</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr><td>Riya</td><td>KPI API endpoint</td><td><span class="status review">Submitted</span></td><td>Blocked dep</td><td>Review | Reopen</td></tr>
+              <tr><td>Karan</td><td>Frontend filter panel</td><td><span class="status review">Reviewed</span></td><td>Scope drift</td><td>Comment | Reopen</td></tr>
+              <tr><td>Neha</td><td>CSV export parser</td><td><span class="status review">Submitted</span></td><td>None</td><td>Review | Close</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Review Comment Panel</h3>
+            <div class="field"><label>Selected Entry</label><div>Riya - KPI API endpoint</div></div>
+            <div class="field" style="margin-top:8px;"><label>Comment</label><div>Please attach sample response payload and edge-case test note.</div></div>
+            <div class="badge-row" style="margin-top:8px;">
+              <span class="badge">Action: Reviewed</span>
+              <span class="badge">Or Reopen</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Queue KPIs</h3>
+            <div class="kpi-title">Submitted Pending</div><div class="kpi-value">11</div>
+            <div class="kpi-title">Reopened (Today)</div><div class="kpi-value">4</div>
+          </div>
+        </div>
+      </section>
+      <div class="footer">Review Queue Mockup</div>
+    </main>
+  </div>
+</body>
+</html>

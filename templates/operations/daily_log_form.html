@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block title %}Log Task | InternMate{% endblock %}
+{% block content %}
+<section class="page-head p-3 p-md-4 mb-3">
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <p class="text-uppercase small text-muted mb-1">Task Entry</p>
+      <h3 class="mb-1">{% if is_edit %}Edit Task{% else %}Log Daily Task{% endif %}</h3>
+      <p class="text-muted mb-0">{% if is_edit %}Update progress, workflow, blockers, and AI usage.{% else %}Available for interns, mentors, and managers.{% endif %}</p>
+    </div>
+    <a class="btn btn-outline-secondary" href="{% url 'daily-logs-page' %}">Back to Logs</a>
+  </div>
+</section>
+
+<form method="post" class="surface-card p-3 p-md-4">
+  {% csrf_token %}
+
+  {% if form.non_field_errors %}
+  <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+  {% endif %}
+
+  <h5 class="mb-3">Task Details</h5>
+  <div class="row g-3">
+    <div class="col-md-3"><label class="form-label">Date</label>{{ form.log_date }}</div>
+    <div class="col-md-3"><label class="form-label">Intern</label>{{ form.intern_profile }}</div>
+    <div class="col-md-3"><label class="form-label">Project</label>{{ form.project }}</div>
+    <div class="col-md-3"><label class="form-label">Task Type</label>{{ form.task_type }}</div>
+    <div class="col-md-6"><label class="form-label">Task Name</label>{{ form.task_name }}</div>
+    <div class="col-md-6"><label class="form-label">Priority</label>{{ form.priority }}</div>
+    <div class="col-12"><label class="form-label">Task Description</label>{{ form.task_description }}</div>
+  </div>
+
+  <hr class="my-4" />
+  <h5 class="mb-3">Progress and Workflow</h5>
+  <div class="row g-3">
+    <div class="col-md-6"><label class="form-label">Planned Work</label>{{ form.planned_work }}</div>
+    <div class="col-md-6"><label class="form-label">Actual Work</label>{{ form.actual_work }}</div>
+    <div class="col-md-2"><label class="form-label">Completion %</label>{{ form.completion_percentage }}</div>
+    <div class="col-md-3"><label class="form-label">Workflow State</label>{{ form.workflow_state }}</div>
+    <div class="col-md-3"><label class="form-label">Expected Completion</label>{{ form.expected_completion_date }}</div>
+    <div class="col-md-2"><label class="form-label">Time Spent (hrs)</label>{{ form.time_spent_hours }}</div>
+    <div class="col-md-2"><label class="form-label">Final Owner</label>{{ form.final_owner }}</div>
+    <div class="col-md-12"><label class="form-label">Deliverable Link</label>{{ form.deliverable_link }}</div>
+    <div class="col-md-12"><label class="form-label">Remarks</label>{{ form.remarks }}</div>
+  </div>
+
+  <hr class="my-4" />
+  <h5 class="mb-3">Dependencies and Blockers</h5>
+  <div class="row g-3">
+    <div class="col-md-2 d-flex align-items-center mt-4">
+      <div class="form-check">{{ form.blocker_flag }} <label class="form-check-label ms-1">Blocked</label></div>
+    </div>
+    <div class="col-md-10"><label class="form-label">Dependency (optional)</label><input class="form-control" name="dependency_text" placeholder="Dependency on another team or task" value="{{ dependency_text|default:'' }}" /></div>
+    <div class="col-md-6"><label class="form-label">Blocker Description</label>{{ form.blocker_description }}</div>
+    <div class="col-md-6"><label class="form-label">Support Needed</label>{{ form.support_needed }}</div>
+  </div>
+
+  <hr class="my-4" />
+  <h5 class="mb-3">Responsible AI Usage</h5>
+  <div class="row g-3">
+    <div class="col-md-2 d-flex align-items-center mt-4">
+      <div class="form-check"><input class="form-check-input" type="checkbox" name="used_ai_flag" id="used_ai_flag" {% if ai_usage and ai_usage.used_ai_flag %}checked{% endif %} /> <label class="form-check-label ms-1" for="used_ai_flag">Used AI</label></div>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">AI Tool</label>
+      <select class="form-select" name="ai_tool">
+        <option value="">Select</option>
+        {% for i in ai_tool_options %}<option value="{{ i.value }}" {% if ai_usage and ai_usage.ai_tool_id == i.id %}selected{% endif %}>{{ i.value }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">AI Assistance Type</label>
+      <select class="form-select" name="ai_assistance_type">
+        <option value="">Select</option>
+        {% for i in ai_assist_options %}<option value="{{ i.value }}" {% if ai_usage and ai_usage.ai_assistance_type_id == i.id %}selected{% endif %}>{{ i.value }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="col-md-2"><label class="form-label">Contribution %</label><input class="form-control" type="number" min="0" max="100" name="ai_contribution_percentage" value="{% if ai_usage %}{{ ai_usage.ai_contribution_percentage }}{% else %}0{% endif %}" /></div>
+    <div class="col-md-4">
+      <label class="form-label">Output Usage</label>
+      <select class="form-select" name="output_usage">
+        <option value="">Select</option>
+        {% for i in output_usage_options %}<option value="{{ i.value }}" {% if ai_usage and ai_usage.output_usage_id == i.id %}selected{% endif %}>{{ i.value }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label">Human Review Status</label>
+      <select class="form-select" name="human_review_status">
+        <option value="">Select</option>
+        {% for i in human_review_options %}<option value="{{ i.value }}" {% if ai_usage and ai_usage.human_review_status_id == i.id %}selected{% endif %}>{{ i.value }}</option>{% endfor %}
+      </select>
+    </div>
+    <div class="col-md-2"><label class="form-label">Helpfulness (0-5)</label><input class="form-control" type="number" min="0" max="5" name="accuracy_helpfulness_rating" value="{% if ai_usage %}{{ ai_usage.accuracy_helpfulness_rating }}{% else %}0{% endif %}" /></div>
+    <div class="col-md-2"><label class="form-label">Time Saved (hrs)</label><input class="form-control" type="number" min="0" step="0.1" name="estimated_time_saved_hours" value="{% if ai_usage %}{{ ai_usage.estimated_time_saved_hours }}{% else %}0{% endif %}" /></div>
+    <div class="col-12"><label class="form-label">Prompt Summary</label><textarea class="form-control" rows="2" name="prompt_summary" placeholder="Short summary of prompt/query">{% if ai_usage %}{{ ai_usage.prompt_summary }}{% endif %}</textarea></div>
+  </div>
+
+  {% if is_edit %}
+  <hr class="my-4" />
+  <h5 class="mb-3">Update Log (JIRA-style)</h5>
+  <div class="row g-3">
+    <div class="col-12">
+      <label class="form-label">What changed in this update?</label>
+      {{ form.update_note }}
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="d-flex gap-2 mt-4">
+    <button class="btn btn-primary" type="submit">{% if is_edit %}Update Task{% else %}Save Task{% endif %}</button>
+    <a class="btn btn-outline-secondary" href="{% url 'daily-logs-page' %}">Cancel</a>
+  </div>
+</form>
+{% endblock %}

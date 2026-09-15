@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block title %}Daily Logs | InternMate{% endblock %}
+{% block content %}
+<section class="page-head p-3 p-md-4 mb-3">
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+    <div>
+      <p class="text-uppercase small text-muted mb-1">Work Journal</p>
+      <h3 class="mb-1">Daily Logs</h3>
+      <p class="text-muted mb-0">On Hold = blocked or unresolved dependency on others.</p>
+    </div>
+    <div class="d-flex gap-2">
+      <a class="btn btn-sm btn-primary" href="{% url 'task-create-page' %}">+ Log Task</a>
+      <span class="pill bad">Blocked</span>
+      <span class="pill warn">On Hold</span>
+      <span class="pill ok">Clear</span>
+    </div>
+  </div>
+</section>
+
+<form method="get" class="surface-card p-3 mb-3">
+  <div class="row g-2 align-items-end">
+    <div class="col-md-2">
+      <label class="form-label small text-muted mb-1">Date From</label>
+      <input class="form-control form-control-sm" type="date" name="date_from" value="{{ selected.date_from|default:'' }}" />
+    </div>
+    <div class="col-md-2">
+      <label class="form-label small text-muted mb-1">Date To</label>
+      <input class="form-control form-control-sm" type="date" name="date_to" value="{{ selected.date_to|default:'' }}" />
+    </div>
+    <div class="col-md-2">
+      <label class="form-label small text-muted mb-1">Intern</label>
+      <select class="form-select form-select-sm" name="intern">
+        <option value="">All</option>
+        {% for it in intern_options %}
+        <option value="{{ it.id }}" {% if selected.intern == it.id|stringformat:'s' %}selected{% endif %}>{{ it.intern_code }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label small text-muted mb-1">Project</label>
+      <select class="form-select form-select-sm" name="project">
+        <option value="">All</option>
+        {% for p in project_options %}
+        <option value="{{ p.id }}" {% if selected.project == p.id|stringformat:'s' %}selected{% endif %}>{{ p.project_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label small text-muted mb-1">Workflow</label>
+      <select class="form-select form-select-sm" name="workflow">
+        <option value="">All</option>
+        <option value="DRAFT" {% if selected.workflow == 'DRAFT' %}selected{% endif %}>Draft</option>
+        <option value="SUBMITTED" {% if selected.workflow == 'SUBMITTED' %}selected{% endif %}>Submitted</option>
+        <option value="REVIEWED" {% if selected.workflow == 'REVIEWED' %}selected{% endif %}>Reviewed</option>
+        <option value="REOPENED" {% if selected.workflow == 'REOPENED' %}selected{% endif %}>Reopened</option>
+        <option value="CLOSED" {% if selected.workflow == 'CLOSED' %}selected{% endif %}>Closed</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label class="form-label small text-muted mb-1">Blocked</label>
+      <select class="form-select form-select-sm" name="blocked">
+        <option value="">All</option>
+        <option value="yes" {% if selected.blocked == 'yes' %}selected{% endif %}>Yes</option>
+        <option value="no" {% if selected.blocked == 'no' %}selected{% endif %}>No</option>
+      </select>
+    </div>
+    <div class="col-12 d-flex gap-2 pt-1">
+      <button class="btn btn-sm btn-primary" type="submit">Apply Filters</button>
+      <a class="btn btn-sm btn-outline-secondary" href="{% url 'daily-logs-page' %}">Reset</a>
+    </div>
+  </div>
+</form>
+
+<div class="surface-card p-3">
+  <div class="table-wrap table-responsive">
+    <table class="table table-modern table-hover align-middle">
+      <thead>
+        <tr>
+          <th>Date</th><th>Intern</th><th>Project</th><th>Task</th><th>Workflow</th><th>Completion</th><th>Blocked</th><th>Final Owner</th><th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for log in logs %}
+        <tr>
+          <td>{{ log.log_date }}</td>
+          <td>{{ log.intern_profile.user.get_full_name|default:log.intern_profile.user.username }}</td>
+          <td>{{ log.project.project_name }}</td>
+          <td><a href="{% url 'task-detail-page' log.id %}">{{ log.task_name }}</a></td>
+          <td><span class="pill info">{{ log.get_workflow_state_display }}</span></td>
+          <td>{{ log.completion_percentage }}%</td>
+          <td>
+            {% if log.blocker_flag %}
+            <span class="pill bad">Yes</span>
+            {% else %}
+            <span class="pill ok">No</span>
+            {% endif %}
+          </td>
+          <td><span class="pill warn">{{ log.final_owner.value }}</span></td>
+          <td>
+            {% if log.id in editable_entry_ids %}
+            <a class="btn btn-sm btn-outline-secondary" href="{% url 'task-edit-page' log.id %}">Edit</a>
+            {% else %}
+            <span class="text-muted small">View only</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="9" class="text-muted">No logs yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% if page_obj %}
+  <div class="d-flex justify-content-between align-items-center pt-3">
+    <small class="text-muted">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</small>
+    <div class="btn-group btn-group-sm">
+      {% if page_obj.has_previous %}
+      <a class="btn btn-outline-secondary" href="?{% if query_string %}{{ query_string }}&{% endif %}page={{ page_obj.previous_page_number }}">Previous</a>
+      {% else %}
+      <button class="btn btn-outline-secondary" disabled>Previous</button>
+      {% endif %}
+      {% if page_obj.has_next %}
+      <a class="btn btn-outline-secondary" href="?{% if query_string %}{{ query_string }}&{% endif %}page={{ page_obj.next_page_number }}">Next</a>
+      {% else %}
+      <button class="btn btn-outline-secondary" disabled>Next</button>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

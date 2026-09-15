@@ -1,0 +1,1 @@
+"""InternMate FastAPI backend package."""

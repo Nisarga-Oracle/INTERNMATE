@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - InternMate Mockup V1</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo"></div> InternMate</div>
+      <nav class="nav">
+        <a class="active" href="dashboard.html">Dashboard</a>
+        <a href="daily_logs.html">Daily Logs</a>
+        <a href="daily_log_form.html">Log Entry Form</a>
+        <a href="intern_project_management.html">Interns & Projects</a>
+        <a href="review_queue.html">Mentor Review Queue</a>
+        <a href="reports_exports.html">Reports & Exports</a>
+        <a href="master_data_admin.html">Master Data Admin</a>
+        <a href="hr_summary_view.html">HR Summary View</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <section class="topbar">
+        <div>
+          <h1>Dashboard</h1>
+          <div class="small">Role: Manager | Full intern visibility</div>
+        </div>
+        <div>
+          <button class="btn ghost">Filter Snapshot</button>
+          <button class="btn primary">Export Dashboard</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="filters">
+          <div class="field"><label>Date Range</label><div>Apr 01 - Apr 21</div></div>
+          <div class="field"><label>Department</label><div>Engineering</div></div>
+          <div class="field"><label>Mentor</label><div>All</div></div>
+          <div class="field"><label>Intern</label><div>All</div></div>
+          <div class="field"><label>Project</label><div>All</div></div>
+          <div class="field"><label>AI Tool</label><div>All</div></div>
+        </div>
+      </section>
+
+      <section class="grid kpis" style="margin-top:14px;">
+        <div class="card"><div class="kpi-title">Total Tasks</div><div class="kpi-value">186</div><span class="kpi-chip">+12 this week</span></div>
+        <div class="card"><div class="kpi-title">Completed</div><div class="kpi-value">118</div><span class="kpi-chip">63.4%</span></div>
+        <div class="card"><div class="kpi-title">Blocked / On Hold</div><div class="kpi-value">19</div><span class="kpi-chip">Needs attention</span></div>
+        <div class="card"><div class="kpi-title">On-Time Completion</div><div class="kpi-value">81%</div><span class="kpi-chip">Stable</span></div>
+        <div class="card"><div class="kpi-title">AI-Assisted Tasks</div><div class="kpi-value">47%</div><span class="kpi-chip">Avg contrib 36%</span></div>
+      </section>
+
+      <section class="layout-2" style="margin-top:14px;">
+        <div class="card">
+          <h3>Daily Productivity Trend</h3>
+          <div class="chart-bars">
+            <div class="bar"><div>Mon</div><div class="track"><span style="width:62%"></span></div><div>62</div></div>
+            <div class="bar"><div>Tue</div><div class="track"><span style="width:74%"></span></div><div>74</div></div>
+            <div class="bar"><div>Wed</div><div class="track"><span style="width:59%"></span></div><div>59</div></div>
+            <div class="bar"><div>Thu</div><div class="track"><span style="width:81%"></span></div><div>81</div></div>
+            <div class="bar"><div>Fri</div><div class="track"><span style="width:77%"></span></div><div>77</div></div>
+          </div>
+          <table class="table" style="margin-top:12px;">
+            <thead><tr><th>Intern</th><th>Completed</th><th>Blocked</th><th>AI Usage</th></tr></thead>
+            <tbody>
+              <tr><td>Riya Sharma</td><td>22</td><td>1</td><td>48%</td></tr>
+              <tr><td>Karan Patel</td><td>19</td><td>3</td><td>52%</td></tr>
+              <tr><td>Neha Gupta</td><td>17</td><td>0</td><td>33%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Blocker Spotlight</h3>
+            <p class="small">7 tasks waiting for API credentials. 4 tasks waiting on data sharing from external team.</p>
+            <div class="badge-row">
+              <span class="badge">Dependency: Security Team</span>
+              <span class="badge">Dependency: Data Ops</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>AI Usage Health</h3>
+            <div class="small">Human Review Compliance</div>
+            <div class="kpi-value">92%</div>
+            <div class="small">Estimated Time Saved: 63.5 hrs</div>
+          </div>
+          <div class="card">
+            <h3>Upcoming Deadlines</h3>
+            <table class="table">
+              <tbody>
+                <tr><td>UI test report</td><td>Apr 22</td></tr>
+                <tr><td>API spec v2</td><td>Apr 23</td></tr>
+                <tr><td>UAT prep notes</td><td>Apr 24</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <div class="footer">Dashboard Mockup</div>
+    </main>
+  </div>
+</body>
+</html>

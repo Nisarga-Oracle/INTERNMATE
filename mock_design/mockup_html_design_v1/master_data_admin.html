@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Master Data Admin - InternMate Mockup V1</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo"></div> InternMate</div>
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="daily_logs.html">Daily Logs</a>
+        <a href="daily_log_form.html">Log Entry Form</a>
+        <a href="intern_project_management.html">Interns & Projects</a>
+        <a href="review_queue.html">Mentor Review Queue</a>
+        <a href="reports_exports.html">Reports & Exports</a>
+        <a class="active" href="master_data_admin.html">Master Data Admin</a>
+        <a href="hr_summary_view.html">HR Summary View</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <section class="topbar">
+        <div>
+          <h1>Master Data Administration</h1>
+          <div class="small">Admin-managed dropdown values and statuses.</div>
+        </div>
+        <div>
+          <button class="btn ghost">+ Add List Item</button>
+          <button class="btn primary">Publish Changes</button>
+        </div>
+      </section>
+
+      <section class="layout-2">
+        <div class="card">
+          <h3>Managed Lists</h3>
+          <table class="table">
+            <thead><tr><th>List</th><th>Values</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Task Type</td><td>Backend, Frontend, Testing</td><td>Active</td></tr>
+              <tr><td>Priority</td><td>Low, Medium, High, Critical</td><td>Active</td></tr>
+              <tr><td>Workflow State</td><td>Draft, Submitted, Reviewed, Reopened, Closed</td><td>Active</td></tr>
+              <tr><td>AI Tool</td><td>None, ChatGPT, Codex, Copilot, OCI GenAI, Other</td><td>Active</td></tr>
+              <tr><td>Final Owner</td><td>Independent, Joint</td><td>Active</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3>Edit Selected List</h3>
+          <div class="field"><label>Selected</label><div>Completion Status</div></div>
+          <table class="table" style="margin-top:8px;">
+            <thead><tr><th>Order</th><th>Value</th><th>Mapped Rule</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Not Started</td><td>0%</td></tr>
+              <tr><td>2</td><td>Initiated</td><td>1-30%</td></tr>
+              <tr><td>3</td><td>In Progress</td><td>31-70%</td></tr>
+              <tr><td>4</td><td>Near Completion</td><td>71-99%</td></tr>
+              <tr><td>5</td><td>Completed</td><td>100%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <div class="footer">Master Data Mockup</div>
+    </main>
+  </div>
+</body>
+</html>

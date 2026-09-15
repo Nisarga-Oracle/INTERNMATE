@@ -1,0 +1,117 @@
+{
+  "date": "2026-04-24",
+  "tested_by": "admin API auth",
+  "api_checks": [
+    {
+      "endpoint": "/api/departments/",
+      "method": "GET",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "endpoint": "/api/projects/",
+      "method": "GET",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "endpoint": "/api/interns/",
+      "method": "GET",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "endpoint": "/api/intern-assignments/",
+      "method": "GET",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "endpoint": "/api/master-data-lists/",
+      "method": "GET",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "endpoint": "/api/master-data-items/",
+      "method": "GET",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "endpoint": "/api/daily-logs/",
+      "method": "GET",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "endpoint": "/api/ai-usage/",
+      "method": "GET",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "endpoint": "/api/review-comments/",
+      "method": "GET",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "endpoint": "/api/departments/",
+      "method": "POST",
+      "status_code": 201,
+      "pass": true
+    },
+    {
+      "endpoint": "/api/projects/",
+      "method": "POST",
+      "status_code": 201,
+      "pass": true
+    },
+    {
+      "endpoint": "/api/daily-logs/",
+      "method": "POST",
+      "status_code": 201,
+      "pass": true,
+      "error": null
+    },
+    {
+      "endpoint": "/api/daily-logs/55/workflow/",
+      "method": "POST",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "endpoint": "/api/ai-usage/",
+      "method": "POST",
+      "status_code": 201,
+      "pass": true
+    },
+    {
+      "endpoint": "/api/daily-logs/55/",
+      "method": "GET",
+      "status_code": 200,
+      "pass": true
+    }
+  ],
+  "created_records": {
+    "department_id": 4,
+    "project_id": 4,
+    "daily_log_id": 55
+  },
+  "ui_verification": [
+    {
+      "page": "/daily-logs/",
+      "check": "task visible: API Verify Task APIUI-20260424-R2",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "page": "/daily-logs/55/",
+      "check": "detail page shows created task",
+      "status_code": 200,
+      "pass": true
+    }
+  ],
+  "overall_status": "PASS"
+}

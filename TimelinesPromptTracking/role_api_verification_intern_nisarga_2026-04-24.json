@@ -1,0 +1,60 @@
+{
+  "date": "2026-04-24",
+  "scope": "Role API verification (GET + PUT only)",
+  "intern": "Nisarga Angadi",
+  "mentor": "Gaurav Mahna",
+  "project": "AIDOC",
+  "task": "TDD Diagram updation",
+  "created_records": {
+    "mentor_username": "gaurav_mahna",
+    "intern_username": "nisarga_angadi",
+    "intern_profile_id": 4,
+    "project_id": 5,
+    "daily_log_id": 56
+  },
+  "checks": [
+    {
+      "role": "INTERN",
+      "endpoint": "/api/daily-logs/",
+      "method": "GET",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "role": "INTERN",
+      "endpoint": "/api/daily-logs/56/",
+      "method": "GET",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "role": "INTERN",
+      "endpoint": "/api/daily-logs/56/",
+      "method": "PUT",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "role": "MENTOR",
+      "endpoint": "/api/daily-logs/",
+      "method": "GET",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "role": "MENTOR",
+      "endpoint": "/api/daily-logs/56/",
+      "method": "GET",
+      "status_code": 200,
+      "pass": true
+    },
+    {
+      "role": "MENTOR",
+      "endpoint": "/api/daily-logs/56/",
+      "method": "PUT",
+      "status_code": 200,
+      "pass": true
+    }
+  ],
+  "overall_status": "PASS"
+}

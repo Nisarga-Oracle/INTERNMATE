@@ -1,0 +1,146 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How to Guide for Codex CLI Setup | InternMate</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'app.css' %}" />
+  </head>
+  <body class="app-body">
+    <div class="container py-4 py-md-5">
+      <div class="hero p-4 p-md-5">
+        <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-2">
+          <p class="text-uppercase text-muted small mb-0">Digital Worker - InternMate</p>
+          <div class="d-flex flex-wrap gap-2">
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'landing' %}">Back to Main Page</a>
+            <a class="btn btn-success btn-sm" href="{% url 'login' %}">Login</a>
+          </div>
+        </div>
+        <h1 class="display-6 fw-bold mb-3">How to Guide for CODEX CLI Setup</h1>
+        <p class="text-muted mb-4">Use this quick guide to connect Codex CLI with InternMate MCP over HTTP and start role-based task operations.</p>
+
+        <div class="soft-card p-3 p-md-4 mb-4">
+          <h5 class="mb-3">Setup Steps</h5>
+          <ol class="mb-0">
+            <li>Start InternMate Django app on <code>http://127.0.0.1:8000</code>.</li>
+            <li>Set MCP env vars: <code>INTERNMATE_BASE_URL</code>, <code>INTERNMATE_API_USERNAME</code>, <code>INTERNMATE_API_PASSWORD</code>.</li>
+            <li>Run MCP server on <code>http://127.0.0.1:9001/mcp</code>.</li>
+            <li>Add MCP server in Codex CLI config with <code>transport=\"http\"</code> and URL <code>http://127.0.0.1:9001/mcp</code>.</li>
+            <li>Restart Codex CLI and validate with tools list call.</li>
+          </ol>
+        </div>
+
+        <div class="soft-card p-3 p-md-4 mb-4">
+          <h5 class="mb-3">Expected MCP Tools</h5>
+          <ul class="mb-0">
+            <li><code>InternMate_get_daily_logs</code></li>
+            <li><code>InternMate_get_task</code></li>
+            <li><code>InternMate_update_task</code></li>
+            <li><code>InternMate_list_interns</code></li>
+            <li><code>InternMate_list_projects</code></li>
+          </ul>
+        </div>
+
+        <div class="soft-card p-3 p-md-4">
+          <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
+            <h5 class="mb-0">API Documentation</h5>
+            <button
+              class="btn btn-outline-primary btn-sm"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#api-doc-content"
+              aria-expanded="false"
+              aria-controls="api-doc-content"
+            >
+              Toggle API Docs
+            </button>
+          </div>
+          <div class="collapse" id="api-doc-content">
+            <p class="text-muted small mb-2">Core InternMate REST endpoints and supported verbs:</p>
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered align-middle small mb-3">
+                <thead class="table-light">
+                  <tr>
+                    <th>Endpoint</th>
+                    <th>Supported Verbs</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>/api/daily-logs/</code></td>
+                    <td><code>GET</code>, <code>POST</code></td>
+                    <td>List and create daily task logs.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/api/daily-logs/{id}/</code></td>
+                    <td><code>GET</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code></td>
+                    <td>Detail/update/delete based on role permissions and visibility.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/api/daily-logs/{id}/workflow/</code></td>
+                    <td><code>POST</code></td>
+                    <td>Workflow action endpoint (<code>DRAFT/SUBMITTED/REVIEWED/REOPENED/CLOSED</code>).</td>
+                  </tr>
+                  <tr>
+                    <td><code>/api/interns/</code>, <code>/api/interns/{id}/</code></td>
+                    <td><code>GET</code> (+ <code>POST/PUT/PATCH/DELETE</code> admin-only)</td>
+                    <td>Intern profile management.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/api/projects/</code>, <code>/api/projects/{id}/</code></td>
+                    <td><code>GET</code> (+ <code>POST/PUT/PATCH/DELETE</code> admin-only)</td>
+                    <td>Project master management.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/api/departments/</code>, <code>/api/departments/{id}/</code></td>
+                    <td><code>GET</code> (+ <code>POST/PUT/PATCH/DELETE</code> admin-only)</td>
+                    <td>Department master management.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/api/intern-assignments/</code>, <code>/api/intern-assignments/{id}/</code></td>
+                    <td><code>GET</code> (+ <code>POST/PUT/PATCH/DELETE</code> admin-only)</td>
+                    <td>Intern-project assignment mapping.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/api/master-data-lists/</code>, <code>/api/master-data-lists/{id}/</code></td>
+                    <td><code>GET</code> (+ <code>POST/PUT/PATCH/DELETE</code> admin-only)</td>
+                    <td>Dropdown list definitions.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/api/master-data-items/</code>, <code>/api/master-data-items/{id}/</code></td>
+                    <td><code>GET</code> (+ <code>POST/PUT/PATCH/DELETE</code> admin-only)</td>
+                    <td>Dropdown list values.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/api/ai-usage/</code>, <code>/api/ai-usage/{id}/</code></td>
+                    <td><code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code></td>
+                    <td>Responsible AI usage records linked to tasks.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/api/review-comments/</code></td>
+                    <td><code>GET</code></td>
+                    <td>List mentor/manager review comments.</td>
+                  </tr>
+                  <tr>
+                    <td><code>/reports/export/?format=csv|xlsx|pdf</code></td>
+                    <td><code>GET</code></td>
+                    <td>Export filtered report output in supported formats.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="small text-muted">
+              <div><strong>Authentication:</strong> Session auth and Basic auth enabled for API access.</div>
+              <div><strong>Role controls:</strong> Several master endpoints allow write verbs only for Admin role.</div>
+              <div><strong>MCP note:</strong> InternMate MCP server currently uses HTTP transport and calls these APIs with Basic Auth credentials.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

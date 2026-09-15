@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Logs - InternMate Mockup V1</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo"></div> InternMate</div>
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a class="active" href="daily_logs.html">Daily Logs</a>
+        <a href="daily_log_form.html">Log Entry Form</a>
+        <a href="intern_project_management.html">Interns & Projects</a>
+        <a href="review_queue.html">Mentor Review Queue</a>
+        <a href="reports_exports.html">Reports & Exports</a>
+        <a href="master_data_admin.html">Master Data Admin</a>
+        <a href="hr_summary_view.html">HR Summary View</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <section class="topbar">
+        <div>
+          <h1>Daily Progress Logs</h1>
+          <div class="small">Search, filter, and action workflow entries.</div>
+        </div>
+        <div>
+          <a class="btn ghost" href="reports_exports.html">Export</a>
+          <a class="btn primary" href="daily_log_form.html">+ New Log</a>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="filters">
+          <div class="field"><label>Date</label><div>2026-04-21</div></div>
+          <div class="field"><label>Intern</label><div>All Interns</div></div>
+          <div class="field"><label>Project</label><div>All Projects</div></div>
+          <div class="field"><label>Workflow State</label><div>All</div></div>
+          <div class="field"><label>Priority</label><div>All</div></div>
+          <div class="field"><label>AI Tool</label><div>All</div></div>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top:14px;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Date</th><th>Intern</th><th>Task</th><th>Project</th><th>Workflow</th><th>Progress</th><th>Flags</th><th>Owner</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apr 21</td><td>Riya</td><td>Build KPI API endpoint</td><td>InternMate</td>
+              <td><span class="status review">Submitted</span></td>
+              <td><div class="progress"><span data-progress="70"></span></div><div class="small">70%</div></td>
+              <td><span class="status blocked">Blocked</span></td>
+              <td>Joint</td>
+              <td>Review | Reopen</td>
+            </tr>
+            <tr>
+              <td>Apr 21</td><td>Karan</td><td>UI table pagination</td><td>InternMate</td>
+              <td><span class="status draft">Draft</span></td>
+              <td><div class="progress"><span data-progress="28"></span></div><div class="small">28%</div></td>
+              <td>None</td>
+              <td>Independent</td>
+              <td>Edit | Submit</td>
+            </tr>
+            <tr>
+              <td>Apr 20</td><td>Neha</td><td>AI usage report validation</td><td>AI Insights</td>
+              <td><span class="status closed">Closed</span></td>
+              <td><div class="progress"><span data-progress="100"></span></div><div class="small">100%</div></td>
+              <td>On time</td>
+              <td>Joint</td>
+              <td>View</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="layout-2" style="margin-top:14px;">
+        <div class="card">
+          <h3>Daily Stats Snapshot</h3>
+          <div class="grid kpis" style="grid-template-columns:repeat(4,minmax(120px,1fr));">
+            <div><div class="kpi-title">Tasks Logged</div><div class="kpi-value">24</div></div>
+            <div><div class="kpi-title">Completed</div><div class="kpi-value">14</div></div>
+            <div><div class="kpi-title">Avg Completion</div><div class="kpi-value">66%</div></div>
+            <div><div class="kpi-title">Time Saved</div><div class="kpi-value">7.2h</div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Legend</h3>
+          <div class="small">On Hold = Blocked OR unresolved dependency on others.</div>
+        </div>
+      </section>
+      <div class="footer">Daily Logs Mockup</div>
+    </main>
+  </div>
+  <script src="assets/script.js"></script>
+</body>
+</html>

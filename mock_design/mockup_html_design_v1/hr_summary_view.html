@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HR Summary View - InternMate Mockup V1</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="logo"></div> InternMate</div>
+      <nav class="nav">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="daily_logs.html">Daily Logs</a>
+        <a href="daily_log_form.html">Log Entry Form</a>
+        <a href="intern_project_management.html">Interns & Projects</a>
+        <a href="review_queue.html">Mentor Review Queue</a>
+        <a href="reports_exports.html">Reports & Exports</a>
+        <a href="master_data_admin.html">Master Data Admin</a>
+        <a class="active" href="hr_summary_view.html">HR Summary View</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <section class="topbar">
+        <div>
+          <h1>HR Summary View</h1>
+          <div class="small">Summary-only visibility. No raw task detail text.</div>
+        </div>
+        <div>
+          <button class="btn ghost">Export Summary</button>
+          <button class="btn primary">Monthly Snapshot</button>
+        </div>
+      </section>
+
+      <section class="grid kpis">
+        <div class="card"><div class="kpi-title">Total Interns</div><div class="kpi-value">24</div></div>
+        <div class="card"><div class="kpi-title">Active Interns</div><div class="kpi-value">22</div></div>
+        <div class="card"><div class="kpi-title">On Hold Cases</div><div class="kpi-value">5</div></div>
+        <div class="card"><div class="kpi-title">Avg Completion</div><div class="kpi-value">67%</div></div>
+        <div class="card"><div class="kpi-title">Mentor Review SLA</div><div class="kpi-value">88%</div></div>
+      </section>
+
+      <section class="layout-2" style="margin-top:14px;">
+        <div class="card">
+          <h3>Department Summary</h3>
+          <table class="table">
+            <thead><tr><th>Department</th><th>Interns</th><th>Completed Tasks</th><th>Blocked</th><th>Avg KPI</th></tr></thead>
+            <tbody>
+              <tr><td>Engineering</td><td>10</td><td>112</td><td>8</td><td>69%</td></tr>
+              <tr><td>Data</td><td>8</td><td>86</td><td>5</td><td>66%</td></tr>
+              <tr><td>Operations</td><td>6</td><td>51</td><td>4</td><td>63%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3>Policy Signals</h3>
+          <ul>
+            <li>AI usage captured with summary-only prompts.</li>
+            <li>Human review compliance above 90% in Engineering.</li>
+            <li>No direct task-description access in HR view.</li>
+          </ul>
+        </div>
+      </section>
+      <div class="footer">HR Summary Mockup</div>
+    </main>
+  </div>
+</body>
+</html>

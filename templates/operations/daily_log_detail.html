@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block title %}Task Details | InternMate{% endblock %}
+{% block content %}
+<section class="page-head p-3 p-md-4 mb-3">
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <p class="text-uppercase small text-muted mb-1">Task Details</p>
+      <h3 class="mb-1">{{ entry.task_name }}</h3>
+      <p class="text-muted mb-0">{{ entry.log_date }} | {{ entry.intern_profile.user.get_full_name|default:entry.intern_profile.user.username }} | {{ entry.project.project_name }}</p>
+    </div>
+    <div class="d-flex gap-2">
+      {% if can_edit_task %}
+      <a class="btn btn-primary" href="{% url 'task-edit-page' entry.id %}">Edit Task</a>
+      {% endif %}
+      <a class="btn btn-outline-secondary" href="{% url 'daily-logs-page' %}">Back to Logs</a>
+    </div>
+  </div>
+</section>
+
+<div class="row g-3">
+  <div class="col-lg-8">
+    <div class="surface-card p-3 mb-3">
+      <h5 class="mb-3">Work Summary</h5>
+      <div class="row g-2">
+        <div class="col-md-6"><strong>Task Type:</strong> {{ entry.task_type.value }}</div>
+        <div class="col-md-3"><strong>Priority:</strong> {{ entry.priority.value }}</div>
+        <div class="col-md-3"><strong>Final Owner:</strong> {{ entry.final_owner.value }}</div>
+        <div class="col-md-3"><strong>Workflow:</strong> {{ entry.get_workflow_state_display }}</div>
+        <div class="col-md-3"><strong>Completion:</strong> {{ entry.completion_percentage }}%</div>
+        <div class="col-md-3"><strong>Status:</strong> {{ entry.completion_status.value|default:'-' }}</div>
+        <div class="col-md-3"><strong>Time Spent:</strong> {{ entry.time_spent_hours }} hrs</div>
+      </div>
+      <hr />
+      <p><strong>Description:</strong> {{ entry.task_description|default:'-' }}</p>
+      <p><strong>Planned Work:</strong> {{ entry.planned_work|default:'-' }}</p>
+      <p><strong>Actual Work:</strong> {{ entry.actual_work|default:'-' }}</p>
+      <p><strong>Expected Completion Date:</strong> {{ entry.expected_completion_date|default:'-' }}</p>
+      <p><strong>Deliverable:</strong> {% if entry.deliverable_link %}<a href="{{ entry.deliverable_link }}" target="_blank">{{ entry.deliverable_link }}</a>{% else %}-{% endif %}</p>
+      <p><strong>Remarks:</strong> {{ entry.remarks|default:'-' }}</p>
+    </div>
+
+    <div class="surface-card p-3 mb-3">
+      <h5 class="mb-3">Dependencies and Blockers</h5>
+      <p><strong>Blocked:</strong> {% if entry.blocker_flag %}<span class="pill bad">Yes</span>{% else %}<span class="pill ok">No</span>{% endif %}</p>
+      <p><strong>Blocker Description:</strong> {{ entry.blocker_description|default:'-' }}</p>
+      <p><strong>Support Needed:</strong> {{ entry.support_needed|default:'-' }}</p>
+      <h6 class="mt-3">Dependencies</h6>
+      <ul>
+        {% for dep in entry.dependencies.all %}
+        <li>{{ dep.dependency_text }} ({{ dep.dependency_status }})</li>
+        {% empty %}
+        <li class="text-muted">No dependencies added.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="surface-card p-3 mb-3">
+      <h5 class="mb-3">AI Usage</h5>
+      {% if ai_usage %}
+      <p><strong>Used AI:</strong> {{ ai_usage.used_ai_flag|yesno:'Yes,No' }}</p>
+      <p><strong>Tool:</strong> {{ ai_usage.ai_tool.value }}</p>
+      <p><strong>Assistance Type:</strong> {{ ai_usage.ai_assistance_type.value }}</p>
+      <p><strong>Contribution:</strong> {{ ai_usage.ai_contribution_percentage }}%</p>
+      <p><strong>Output Usage:</strong> {{ ai_usage.output_usage.value }}</p>
+      <p><strong>Human Review:</strong> {{ ai_usage.human_review_status.value }}</p>
+      <p><strong>Time Saved:</strong> {{ ai_usage.estimated_time_saved_hours }} hrs</p>
+      <p><strong>Prompt Summary:</strong> {{ ai_usage.prompt_summary|default:'-' }}</p>
+      {% else %}
+      <p class="text-muted">No AI usage captured.</p>
+      {% endif %}
+    </div>
+
+    <div class="surface-card p-3">
+      <h5 class="mb-3">Review Timeline</h5>
+      <ul class="mb-0">
+        {% for comment in review_comments %}
+        <li>
+          <strong>{{ comment.action }}</strong> by {{ comment.reviewer.get_full_name|default:comment.reviewer.username }}
+          <div class="small text-muted">{{ comment.action_at }}</div>
+          <div>{{ comment.comment_text|default:'No comment' }}</div>
+        </li>
+        {% empty %}
+        <li class="text-muted">No review comments yet.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="surface-card p-3 mt-3">
+  <h5 class="mb-3">Change Log</h5>
+  <p class="text-muted small mb-2">Intern updates are recorded with field-level changes and optional update notes.</p>
+  <div class="table-wrap table-responsive">
+    <table class="table table-modern table-sm align-middle">
+      <thead>
+        <tr>
+          <th>When</th><th>By</th><th>Type</th><th>Changes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for log in change_logs %}
+        <tr>
+          <td>{{ log.created_at }}</td>
+          <td>{{ log.actor.get_full_name|default:log.actor.username }}</td>
+          <td>{{ log.action_type }}</td>
+          <td><pre class="mb-0 small">{{ log.new_value_json }}</pre></td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4" class="text-muted">No change history available.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

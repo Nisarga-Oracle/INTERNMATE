@@ -1,0 +1,27 @@
+.venv/
+.venv-win/
+venv/
+node_modules/
+__pycache__/
+*.pyc
+db.sqlite3
+*.sqlite3
+staticfiles/
+.DS_Store
+
+# Local configuration, credentials, generated files, and runtime logs.
+.env
+.env.example
+*.pem
+*.key
+Wallet*/
+wallet*/
+frontend/dist/
+docs/handover_render/
+django_*_stdout
+django_*_stderr
+django_*.log
+*.zip
+
+seed_atp_login_accounts
+.env
