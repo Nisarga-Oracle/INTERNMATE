@@ -25,3 +25,5 @@ django_*.log
 
 seed_atp_login_accounts
 .env
+INTERNMATE_WALLET/
+requirements-web.txt
