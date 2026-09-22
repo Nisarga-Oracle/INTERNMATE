@@ -1,0 +1,2 @@
+"""InternMate MCP server package."""
+
